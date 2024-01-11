@@ -1,0 +1,23 @@
+.loader {
+    width: 100%;
+    display: flex;
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loader img {
+    height: 60px;
+    width: 60px;
+    opacity: 0.7;
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    animation: spin 1s linear 0s infinite forwards;
+    -webkit-animation: spin 1s linear 0s infinite forwards;
+}
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+    }
+}

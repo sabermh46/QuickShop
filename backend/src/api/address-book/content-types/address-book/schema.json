@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "address_books",
+  "info": {
+    "singularName": "address-book",
+    "pluralName": "address-books",
+    "displayName": "Address Book"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "address_book"
+    },
+    "addresses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::address.address",
+      "mappedBy": "address_book"
+    }
+  }
+}

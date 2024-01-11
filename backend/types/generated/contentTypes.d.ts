@@ -587,7 +587,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -615,6 +614,37 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'plugin::users-permissions.user',
       'manyToOne',
       'plugin::users-permissions.role'
+    >;
+    profilepic: Attribute.Media;
+    firstname: Attribute.String;
+    lastname: Attribute.String;
+    cart: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::cart.cart'
+    >;
+    orders: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::order.order'
+    >;
+    birthday: Attribute.Date;
+    gender: Attribute.String;
+    mobile: Attribute.String;
+    address_book: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::address-book.address-book'
+    >;
+    product_ratings: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::product-rating.product-rating'
+    >;
+    product_review: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::product-review.product-review'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -677,12 +707,365 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiAddressAddress extends Schema.CollectionType {
+  collectionName: 'addresses';
+  info: {
+    singularName: 'address';
+    pluralName: 'addresses';
+    displayName: 'Address';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    province: Attribute.String;
+    city: Attribute.String;
+    area: Attribute.String;
+    address: Attribute.String;
+    fullname: Attribute.String;
+    landmark: Attribute.String;
+    zip: Attribute.BigInteger;
+    mobile: Attribute.String;
+    address_book: Attribute.Relation<
+      'api::address.address',
+      'manyToOne',
+      'api::address-book.address-book'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::address.address',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::address.address',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiAddressBookAddressBook extends Schema.CollectionType {
+  collectionName: 'address_books';
+  info: {
+    singularName: 'address-book';
+    pluralName: 'address-books';
+    displayName: 'Address Book';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    user_id: Attribute.Relation<
+      'api::address-book.address-book',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    addresses: Attribute.Relation<
+      'api::address-book.address-book',
+      'oneToMany',
+      'api::address.address'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::address-book.address-book',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::address-book.address-book',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCartCart extends Schema.CollectionType {
+  collectionName: 'carts';
+  info: {
+    singularName: 'cart';
+    pluralName: 'carts';
+    displayName: 'cart';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    cartitems: Attribute.Relation<
+      'api::cart.cart',
+      'oneToMany',
+      'api::cartitem.cartitem'
+    >;
+    user_id: Attribute.Relation<
+      'api::cart.cart',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::cart.cart', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::cart.cart', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCartitemCartitem extends Schema.CollectionType {
+  collectionName: 'cartitems';
+  info: {
+    singularName: 'cartitem';
+    pluralName: 'cartitems';
+    displayName: 'cartitem';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    product: Attribute.Relation<
+      'api::cartitem.cartitem',
+      'oneToOne',
+      'api::product.product'
+    >;
+    color_variant: Attribute.Relation<
+      'api::cartitem.cartitem',
+      'oneToOne',
+      'api::color-variant.color-variant'
+    >;
+    size_variant: Attribute.Relation<
+      'api::cartitem.cartitem',
+      'oneToOne',
+      'api::size-variant.size-variant'
+    >;
+    price: Attribute.Decimal;
+    cart: Attribute.Relation<
+      'api::cartitem.cartitem',
+      'manyToOne',
+      'api::cart.cart'
+    >;
+    quantity: Attribute.Integer &
+      Attribute.SetMinMax<{
+        min: 1;
+        max: 10;
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::cartitem.cartitem',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::cartitem.cartitem',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
+  info: {
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: 'category';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required & Attribute.Unique;
+    products: Attribute.Relation<
+      'api::category.category',
+      'manyToMany',
+      'api::product.product'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiColorColor extends Schema.CollectionType {
+  collectionName: 'colors';
+  info: {
+    singularName: 'color';
+    pluralName: 'colors';
+    displayName: 'Color';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Unique;
+    hex: Attribute.String;
+    color_variant: Attribute.Relation<
+      'api::color.color',
+      'oneToOne',
+      'api::color-variant.color-variant'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::color.color',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::color.color',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiColorVariantColorVariant extends Schema.CollectionType {
+  collectionName: 'color_variants';
+  info: {
+    singularName: 'color-variant';
+    pluralName: 'color-variants';
+    displayName: 'Color Variant';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    color: Attribute.Relation<
+      'api::color-variant.color-variant',
+      'oneToOne',
+      'api::color.color'
+    >;
+    additionalPrice: Attribute.Decimal;
+    product: Attribute.Relation<
+      'api::color-variant.color-variant',
+      'manyToOne',
+      'api::product.product'
+    >;
+    image: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::color-variant.color-variant',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::color-variant.color-variant',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiOrderOrder extends Schema.CollectionType {
+  collectionName: 'orders';
+  info: {
+    singularName: 'order';
+    pluralName: 'orders';
+    displayName: 'Order';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    cart: Attribute.Relation<'api::order.order', 'oneToOne', 'api::cart.cart'>;
+    users_permissions_user: Attribute.Relation<
+      'api::order.order',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    total: Attribute.Decimal;
+    status: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiOrderHistoryOrderHistory extends Schema.CollectionType {
+  collectionName: 'order_histories';
+  info: {
+    singularName: 'order-history';
+    pluralName: 'order-histories';
+    displayName: 'Order History';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    time: Attribute.DateTime;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::order-history.order-history',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::order-history.order-history',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiProductProduct extends Schema.CollectionType {
   collectionName: 'products';
   info: {
     singularName: 'product';
     pluralName: 'products';
     displayName: 'product';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -698,6 +1081,31 @@ export interface ApiProductProduct extends Schema.CollectionType {
       'manyToOne',
       'api::vendor.vendor'
     >;
+    categories: Attribute.Relation<
+      'api::product.product',
+      'manyToMany',
+      'api::category.category'
+    >;
+    product_reviews: Attribute.Relation<
+      'api::product.product',
+      'oneToMany',
+      'api::product-review.product-review'
+    >;
+    color_variants: Attribute.Relation<
+      'api::product.product',
+      'oneToMany',
+      'api::color-variant.color-variant'
+    >;
+    size_variants: Attribute.Relation<
+      'api::product.product',
+      'oneToMany',
+      'api::size-variant.size-variant'
+    >;
+    product_ratings: Attribute.Relation<
+      'api::product.product',
+      'oneToMany',
+      'api::product-rating.product-rating'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -709,6 +1117,155 @@ export interface ApiProductProduct extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProductRatingProductRating extends Schema.CollectionType {
+  collectionName: 'product_ratings';
+  info: {
+    singularName: 'product-rating';
+    pluralName: 'product-ratings';
+    displayName: 'ProductRating';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    rating: Attribute.Integer &
+      Attribute.SetMinMax<{
+        min: 1;
+        max: 5;
+      }>;
+    user_id: Attribute.Relation<
+      'api::product-rating.product-rating',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    product: Attribute.Relation<
+      'api::product-rating.product-rating',
+      'manyToOne',
+      'api::product.product'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::product-rating.product-rating',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::product-rating.product-rating',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProductReviewProductReview extends Schema.CollectionType {
+  collectionName: 'product_reviews';
+  info: {
+    singularName: 'product-review';
+    pluralName: 'product-reviews';
+    displayName: 'productReview';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Review: Attribute.Text;
+    images: Attribute.Media;
+    user_id: Attribute.Relation<
+      'api::product-review.product-review',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    product: Attribute.Relation<
+      'api::product-review.product-review',
+      'manyToOne',
+      'api::product.product'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::product-review.product-review',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::product-review.product-review',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSizeSize extends Schema.CollectionType {
+  collectionName: 'sizes';
+  info: {
+    singularName: 'size';
+    pluralName: 'sizes';
+    displayName: 'size';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    size: Attribute.String & Attribute.Unique;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::size.size', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::size.size', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSizeVariantSizeVariant extends Schema.CollectionType {
+  collectionName: 'size_variants';
+  info: {
+    singularName: 'size-variant';
+    pluralName: 'size-variants';
+    displayName: 'Size Variant';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    size: Attribute.Relation<
+      'api::size-variant.size-variant',
+      'oneToOne',
+      'api::size.size'
+    >;
+    addtitionalPrice: Attribute.Decimal;
+    product: Attribute.Relation<
+      'api::size-variant.size-variant',
+      'manyToOne',
+      'api::product.product'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::size-variant.size-variant',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::size-variant.size-variant',
       'oneToOne',
       'admin::user'
     > &
@@ -736,6 +1293,8 @@ export interface ApiVendorVendor extends Schema.CollectionType {
       'oneToMany',
       'api::product.product'
     >;
+    banner: Attribute.Media;
+    logo: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -770,7 +1329,20 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::address.address': ApiAddressAddress;
+      'api::address-book.address-book': ApiAddressBookAddressBook;
+      'api::cart.cart': ApiCartCart;
+      'api::cartitem.cartitem': ApiCartitemCartitem;
+      'api::category.category': ApiCategoryCategory;
+      'api::color.color': ApiColorColor;
+      'api::color-variant.color-variant': ApiColorVariantColorVariant;
+      'api::order.order': ApiOrderOrder;
+      'api::order-history.order-history': ApiOrderHistoryOrderHistory;
       'api::product.product': ApiProductProduct;
+      'api::product-rating.product-rating': ApiProductRatingProductRating;
+      'api::product-review.product-review': ApiProductReviewProductReview;
+      'api::size.size': ApiSizeSize;
+      'api::size-variant.size-variant': ApiSizeVariantSizeVariant;
       'api::vendor.vendor': ApiVendorVendor;
     }
   }

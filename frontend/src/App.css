@@ -1,38 +1,82 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Anek+Bangla&family=Nunito&family=Poppins&family=Signika+Negative&display=swap');
+
+
+
+:root {
+  --font-bangla: 'Anek Bangla', sans-serif;
+  --font-poppins: 'Poppins', sans-serif;
+  --font-nunito: 'Nunito', sans-serif;
+  --font-signika: 'Signika Negative', sans-serif;
+  --pure-purple: #8847F2;
+  --app-bg: rgb(234, 234, 234);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-poppins);
+ }
+
+
+ .pd-x-5 {
+    padding: 0 5px;
+ }
+ .pd-x-10 {
+    padding: 0 10px;
+ }
+ .pd-y-5 {
+  padding: 5px 0;
+}
+.pd-y-10 {
+  padding: 10px 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+ .form-error {
+  color: rgb(254 107 62);
+ }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+ .flex {
   display: flex;
-  flex-direction: column;
+ }
+ .flex.wrap {
+  flex-wrap: wrap;
+ }
+ .flex.x-center {
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+ }
+ .flex.column {
+  flex-direction: column;
+ }
+ .flex.space-between {
+  justify-content: space-between;
+ }
+.flex.g5 {
+  gap: 5px;
 }
-
-.App-link {
-  color: #61dafb;
+.flex.g10 {
+  gap: 10px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.flex.g15 {
+  gap: 15px;
 }
+ .flex.g20 {
+  gap: 20px;
+ }
+ .flex .f1 {
+  flex: 1;
+ }
+ .flex .f2 {
+  flex: 2;
+ }
+ .flex .f3 {
+  flex: 3;
+ }
+ .flex .f4 {
+  flex: 4;
+ }
+ .flex .f5 {
+  flex: 5;
+ }
+ .flex .f6 {
+  flex: 6;
+ }

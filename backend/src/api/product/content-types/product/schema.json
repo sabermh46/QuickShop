@@ -4,7 +4,8 @@
   "info": {
     "singularName": "product",
     "pluralName": "products",
-    "displayName": "product"
+    "displayName": "product",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -23,14 +24,15 @@
       "required": true
     },
     "cover": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "instock": {
       "type": "integer",
@@ -41,6 +43,36 @@
       "relation": "manyToOne",
       "target": "api::vendor.vendor",
       "inversedBy": "products"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "mappedBy": "products"
+    },
+    "product_reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product-review.product-review",
+      "mappedBy": "product"
+    },
+    "color_variants": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::color-variant.color-variant",
+      "mappedBy": "product"
+    },
+    "size_variants": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::size-variant.size-variant",
+      "mappedBy": "product"
+    },
+    "product_ratings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product-rating.product-rating",
+      "mappedBy": "product"
     }
   }
 }

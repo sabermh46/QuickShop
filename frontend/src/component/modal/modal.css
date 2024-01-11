@@ -1,0 +1,39 @@
+.modalClose {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border-radius: 12px;
+    height: 30px;
+    width: 30px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: var(--pure-purple);
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.28);
+    transition: 0.5s;
+}
+.modalClose::before, .modalClose::after{
+    content: '';
+    height: 14px;
+    width: 2px;
+    background: rgb(219, 190, 239);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 3px;
+    transition: 0.5s;
+}
+
+.modalClose::before{
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+.modalClose::after{
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.modalClose:hover {
+    background: rgb(219, 190, 239);
+}
+.modalClose:hover::before, .modalClose:hover::after{
+    background: var(--pure-purple);
+}

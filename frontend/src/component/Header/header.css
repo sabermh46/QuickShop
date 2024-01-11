@@ -1,0 +1,223 @@
+.navbar {
+    color: red;
+    height: 70px;
+    background: rgb(245, 245, 245);
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+    padding: 0 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.346);
+    z-index: 999;
+}
+
+.navbar .brand {
+    filter: drop-shadow(2px 3px 2px rgba(175, 61, 246, 0.448));
+}
+.navbar .brand img {
+    height: 60px;
+}
+.rightSide {
+    display:  flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.userbuttons button {
+    padding: 5px 15px;
+    background: #8847F2;
+    color: white;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+.searchBar {
+    display: flex;
+    gap: 2px;
+    height: 30px;
+    padding: 2px;
+    border-radius: 40px;
+    border: 1.5px solid rgb(183, 183, 183);
+    overflow: hidden;
+}
+.searchBar button {
+    width: 40px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.searchBar input {
+    padding-left: 8px;
+    background: transparent;
+    border: none;
+}
+.searchBar input:focus-visible {
+    outline: none;
+}
+.searchBar button {
+    border-radius: 40px;
+    border: none;
+    background: rgb(213, 213, 213);
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+.searchBar button:hover {
+    background: rgb(186, 186, 186);
+}
+.searchBar button img {
+    height: 20px;
+}
+.userbuttons > div {
+    display: flex;
+    gap: 7px;
+}
+.userbuttons button:hover {
+    border: 1px solid white;
+    text-shadow: 1px 2px 3px rgba(255, 255, 255, 0.61);
+}
+
+.links {
+    display:  flex;
+    gap: 10px;
+}
+.links .link {
+    display: flex;
+    align-items: center;
+}
+.links p {
+    cursor: pointer;
+    color: black;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.5s ease;
+}
+.links p:hover {
+    color: #8847F2;
+    text-shadow: 1px 2px 3px rgba(37, 132, 210, 0.285);
+}
+
+
+.profileIcon {
+    height: 35px;
+    width: 35px;
+    position: relative;
+    cursor: pointer;
+}
+.profileIcon::before {
+    content: '';
+    height: 110%;
+    width: 110%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid rgb(149, 133, 192);
+    border-radius: 100px;
+    transition: 0.5s ease;
+}
+.profileIcon:hover::before {
+    border: 3px solid var(--pure-purple);
+}
+.profileIcon > .icon {
+    height: inherit;
+    width: inherit;
+    -webkit-tap-highlight-color: transparent;
+}
+.profileIcon > .icon img {
+    height: inherit;
+    width: inherit;
+    border-radius: 100px;
+    object-fit: cover;
+}
+.profileIcon .iconbig {
+    border-radius: 200px;
+    height: 90px;
+    width: 90px;
+    object-fit: cover;
+    margin: 0 auto;
+    position: relative;
+    display: block;
+}
+.profileIcon .iconbig::before {
+    content: '';
+    height: 110%;
+    width: 110%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid rgb(42, 8, 137);
+    border-radius: 100px;
+    transition: 0.5s ease;
+}
+.fullname {
+    text-align: center;
+    font-size: 12px;
+    color: black;
+    font-weight: 600;
+}
+
+.profileIcon .body {
+    position: absolute;
+    background: rgba(219, 213, 255, 0.654);
+    backdrop-filter: blur(10px);
+    width: 150px;
+    top: 55px;
+    right: -10px;
+    padding: 10px;
+    padding-top: 20px;
+    border-radius: 12px;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.profileIcon .body::before {
+    content: '';
+    height: 20px;
+    aspect-ratio: 1;
+    background: rgba(219, 213, 255, 0.654);
+    backdrop-filter: blur(10px);
+    position: absolute;
+    top: -10px;
+    right: 17px;
+    z-index: -1;
+    border-top-left-radius: 4px;
+    transform: rotate(45deg);
+}
+.profileIcon .body button {
+    width: 100%;
+    background: rgb(159, 128, 252);
+}
+.profileIcon .body button:hover {
+    background: var(--pure-purple);
+}
+.profileIcon .body.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cartIndicator {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    height: 15px;
+    width: 15px;
+    font-size: 9px;
+    font-weight: 400;
+    border-radius: 10px;
+    background: rgb(195, 83, 83);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

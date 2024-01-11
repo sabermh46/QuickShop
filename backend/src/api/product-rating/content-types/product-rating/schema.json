@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "product_ratings",
+  "info": {
+    "singularName": "product-rating",
+    "pluralName": "product-ratings",
+    "displayName": "ProductRating",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "rating": {
+      "type": "integer",
+      "max": 5,
+      "min": 1
+    },
+    "user_id": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "product_ratings"
+    },
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product.product",
+      "inversedBy": "product_ratings"
+    }
+  }
+}

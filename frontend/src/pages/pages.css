@@ -1,0 +1,64 @@
+.container {
+    width: calc(100% - 40px);
+    margin: 0 auto;
+    max-width: 1200px;
+}
+.pImage {
+    border: 5px solid rgb(203, 203, 203);
+    border-radius: 300px;
+    height: 150px;
+    width: 150px;
+    overflow: hidden;
+}
+.pImage > img {
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+    object-position: center center;
+}
+.pInfo {
+    color: midnightblue;
+}
+.pInfo * {
+    font-family: var(--font-signika);
+}
+.pInfo > .username {
+    font-size: 14px;
+    font-weight: 700;
+}
+.pInfo > .email {
+    text-transform: lowercase;
+    font-size: 14px;
+    font-family: monospace;
+    line-height: 30px;
+}
+.pInfo > .gender {
+    font-size: 16px;
+}
+
+
+
+
+
+
+
+
+
+
+.txt-btn {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--pure-purple);
+    font-weight: 800;
+    letter-spacing: 2px;
+    transition: 0.4s ease;
+    cursor: pointer;
+    height: 25px;
+    padding: 0px 15px;
+    border-radius: 6px;
+}
+.txt-btn:hover {
+    background: var(--pure-purple);
+    color: white;
+}

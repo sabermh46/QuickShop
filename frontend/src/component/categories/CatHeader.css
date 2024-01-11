@@ -1,0 +1,90 @@
+.CategoryPageHeader {
+    width: calc(100%);
+    max-width: 1260px;
+    margin: 0 auto;
+    position: fixed;
+    height: 80px;
+    padding-top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0 50px;
+    top: 70px;
+    background: var(--app-bg);
+    z-index: 99;
+}
+.CategoryPageHeader > div {
+    width: 50%;
+}
+.selectedCategories {
+    padding-top: 5px;
+    overflow-x: scroll;
+}
+.allCats {
+    padding-top: 5px;
+}
+
+.categoryName {
+    font-weight: 500;
+    width: max-content;
+    height: 20px;
+    display: flex;
+    background: var(--pure-purple);
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    border-radius: 50px;
+    padding: 2px;
+    padding-left: 8px;
+    cursor: pointer;
+    transition: 0.7s ease;
+}
+.categoryName .name {
+    color: white;
+    transition: 0.7s ease;
+}
+.categoryName .remove {
+    height: 16px;
+    aspect-ratio: 1;
+    position: relative;
+    border-radius: 30px;
+    background: white;
+    transition: 0.7s ease;
+}
+.categoryName .remove::before {
+    content: '';
+    height: 1.5px;
+    width: 9px;
+    border-radius: 10px;
+    background: rgb(99, 99, 99);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: 0.7s ease;
+}
+.categoryName .remove::after {
+    content: '';
+    height: 9px;
+    width: 1.5px;
+    border-radius: 10px;
+    background: rgb(99, 99, 99);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: 0.7s ease;
+}
+
+
+.categoryName:hover {
+    background: white;
+}
+.categoryName:hover .name {
+    color: var(--pure-purple);
+}
+.categoryName:hover .remove {
+    background: rgb(99, 99, 99);
+}
+.categoryName:hover .remove::before, .categoryName:hover .remove::after {
+    background: white;
+}

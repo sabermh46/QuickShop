@@ -1,0 +1,42 @@
+
+
+
+.cartButton {
+    padding: 5px 7px;
+    padding-top: 8px;
+    height: 35px;
+    aspect-ratio: 1;
+    position: relative;
+    padding-right: 8px;
+    border-radius: 40px;
+    border: none;
+    background: white;
+    cursor: pointer;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.067);
+    transition: 0.4s ease;
+  }
+  .cartButton .svg {
+    height: 18px;
+    width: 18px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 0.4s ease;
+  }
+  .towhite {
+    transition: 0.4s ease;
+    fill: var(--pure-purple);
+}
+.cartButton:hover .svg {
+    transform: scale(1.1) translate(-50%, -50%);
+}
+ 
+  .cartButton:hover {
+    transform: scale(0.9);
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.067);
+    background: var(--pure-purple);
+  }
+  .cartButton:hover .towhite {
+    fill: white;
+}

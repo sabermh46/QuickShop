@@ -1,0 +1,42 @@
+
+
+.ratingContainer {
+    display: flex;
+    background: rgb(245, 245, 245);
+    overflow: hidden;
+}
+.ratingContainer .left {
+    filter: drop-shadow(4px 0px 3px rgba(0, 0, 0, 0.209));
+    color: rgb(67, 15, 157);
+}
+.ratingContainer .left > div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: rgb(255, 255, 255);
+    clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+    padding: 20px;
+    padding-right: 30px;
+}
+.ratingContainer .right {
+    padding: 10px;
+    flex: 1;
+}
+
+
+
+
+
+
+
+.parent {
+    width: 100px;
+    background: rgb(194, 194, 194);
+    height: 10px;
+    border-radius: 6px;
+}
+.child {
+    background: rgb(144, 108, 252);
+    height: 10px;
+    border-radius: 6px;
+}
